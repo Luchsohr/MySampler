@@ -2,38 +2,48 @@ package com.example.mysampler;
 
 import android.media.AudioManager;
 import android.view.View;
-import android.widget.Button;
-import android.media.MediaPlayer;
-
 import androidx.activity.ComponentActivity;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.media.SoundPool;
 import android.widget.Toast;
 import android.widget.ImageView;
-//public class MainActivity extends AppCompatActivity {
+
 public class MainActivity extends ComponentActivity {
+    public  SoundPool soundPool;
+    ImageView imageview;
+    public class SheepView
+    {
+
+        public SheepView(int viewID, final SoundPool sPool, final int soundID, final float fRate) {
 
 
-    private SoundPool soundPool;
-    private ImageView SheepView1;
-    private ImageView SheepView2;
-    private ImageView SheepView3;
-    private ImageView SheepView1b;
-    private ImageView SheepView2b;
-    private ImageView SheepView3b;
+            imageview = findViewById(viewID);
+            imageview.setVisibility(View.VISIBLE);
+            imageview.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    sPool.play(soundID, 1.0f, 1.0f, 1, 0, fRate);
+                }
+            });
+        }
+/*
+        public void SetVisibility(int iVisibility)
+        { imageview.setVisibility(iVisibility);
+        }
+
+ */
+    }
+
+
     int  SheepSoundID1 ;
     int  SheepSoundID2 ;
     int  SheepSoundID3 ;
-
+/*
     public void MyTouchMsg(String s)
     {
         Toast einToast = Toast.makeText(this,s, Toast.LENGTH_SHORT);
         einToast.show();
     }
-
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +54,23 @@ public class MainActivity extends ComponentActivity {
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i1) {
-                MyTouchMsg("Soundpool loaded :-)");
+               // MyTouchMsg("Soundpool loaded :-)");
+
+                if (i==SheepSoundID1)
+                {
+                    SheepView sheepView1 = new SheepView(R.id.SHEEP_ID_1, soundPool, SheepSoundID1, 1.0f);
+                    SheepView sheepView1b = new SheepView(R.id.SHEEP_ID_1b, soundPool, SheepSoundID1, 2.0f);
+                }
+                if (i==SheepSoundID2)
+                {
+                    SheepView sheepView2 = new SheepView(R.id.SHEEP_ID_2, soundPool, SheepSoundID2, 1.0f);
+                    SheepView sheepView2b = new SheepView(R.id.SHEEP_ID_2b, soundPool, SheepSoundID2, 2.0f);
+                }
+                if (i==SheepSoundID3)
+                {
+                    SheepView sheepView3 = new SheepView(R.id.SHEEP_ID_3, soundPool, SheepSoundID3, 1.0f);
+                    SheepView sheepView3b = new SheepView(R.id.SHEEP_ID_3b, soundPool, SheepSoundID3, 2.0f);
+                }
             }
         });
 
@@ -53,51 +79,16 @@ public class MainActivity extends ComponentActivity {
         SheepSoundID3 = soundPool.load(this,R.raw.superschaaf3, 1);
 
 
-        SheepView1 = findViewById(R.id.SHEEP_ID_1);
-        SheepView1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                soundPool.play(SheepSoundID1, 1.0f, 1.0f, 1, 0, 1.0f);
-            }
-        });
-        SheepView2 = findViewById(R.id.SHEEP_ID_2);
-        SheepView2.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                soundPool.play(SheepSoundID2, 1.0f, 1.0f, 1, 0, 1.0f);
-            }
-        });
-        SheepView3 = findViewById(R.id.SHEEP_ID_3);
-        SheepView3.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                soundPool.play(SheepSoundID3, 1.0f, 1.0f, 1, 0, 1.0f);
-            }
-        });
+      //  SheepView sheepView1 = new SheepView(R.id.SHEEP_ID_1, soundPool, SheepSoundID1, 1.0f);
+        /*
+        SheepView sheepView2 = new SheepView(R.id.SHEEP_ID_2, soundPool, SheepSoundID2, 1.0f);
+        SheepView sheepView3 = new SheepView(R.id.SHEEP_ID_3, soundPool, SheepSoundID3, 1.0f);
 
-        SheepView1b = findViewById(R.id.SHEEP_ID_1b);
-        SheepView1b.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                soundPool.play(SheepSoundID1, 1.0f, 1.0f, 1, 0, 2.0f);
-            }
-        });
-        SheepView2b = findViewById(R.id.SHEEP_ID_2b);
-        SheepView2b.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                soundPool.play(SheepSoundID2, 1.0f, 1.0f, 1, 0, 2.0f);
-            }
-        });
-        SheepView3b = findViewById(R.id.SHEEP_ID_3b);
-        SheepView3b.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                soundPool.play(SheepSoundID3, 1.0f, 1.0f, 1, 0, 2.0f);
-            }
-        });
+        SheepView sheepView2b = new SheepView(R.id.SHEEP_ID_2b, soundPool, SheepSoundID2, 2.0f);
+        SheepView sheepView3b = new SheepView(R.id.SHEEP_ID_3b, soundPool, SheepSoundID3, 2.0f);
+        sheepView3b.SetVisibility(View.INVISIBLE);
+*/
+
     };
-
-
 
 }
